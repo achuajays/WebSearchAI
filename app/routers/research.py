@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException
-from pydantic import BaseModel
 from app.services.agent_service import get_research_agent_service
-from typing import Dict, Any, List
+from app.models.scheema import ResearchRequest  , ResearchResponse
+from typing import Dict, Any
 
 router = APIRouter(
     prefix="/api/research",
@@ -10,26 +10,6 @@ router = APIRouter(
 )
 
 
-class ResearchRequest(BaseModel):
-    """
-        Request model for research agent queries.
-
-        Attributes:
-            query (str): The research question or topic to investigate
-        """
-    query: str
-
-
-class ResearchResponse(BaseModel):
-    """
-        Response model for research agent results.
-
-        Attributes:
-            research_data (str): The compiled research findings
-            resource_links (List[str]): Links to sources used in the research
-    """
-    research_data: str
-    resource_links: List[str]
 
 
 @router.post("/run", response_model=Dict[str, Any])
