@@ -1,10 +1,38 @@
-class Agent_Prompt:
+class AgentPrompt:
+    """
+        A class that generates comprehensive research prompts for LLM agents.
 
+        This class creates structured, detailed prompts for conducting thorough
+        research on a specified topic. The prompts guide the agent through a
+        systematic research methodology including search, data extraction,
+        news analysis, and synthesis.
+
+        Attributes:
+            query (str): The research topic or question to investigate.
+        """
     def __init__(self , query) -> None:
+        """
+                Initialize the Agent_Prompt with a research query.
+
+                Args:
+                    query (str): The topic or question to research.
+        """
         self.query = query
 
     def get_prompt(self) -> str:
-        task = f"""Act as an advanced research agent investigating '{self.query}'.
+        """
+                Generate a comprehensive research prompt based on the query.
+
+                The generated prompt includes detailed instructions for:
+                - Conducting systematic web searches
+                - Extracting and analyzing data from authoritative sources
+                - Analyzing recent news coverage
+                - Synthesizing findings into a comprehensive research report
+
+                Returns:
+                    str: A detailed research prompt with methodology and output requirements.
+        """
+        prompt = f"""Act as an advanced research agent investigating '{self.query}'.
 
                 ## OBJECTIVE:
                 Produce comprehensive, factually accurate, and well-structured research data on the topic. and if no query just say 
@@ -51,4 +79,4 @@ class Agent_Prompt:
                 - Ensure all claims are properly attributed
                 """
 
-        return task
+        return prompt

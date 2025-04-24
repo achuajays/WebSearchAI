@@ -8,6 +8,22 @@ logger = logging.getLogger(__name__)
 
 
 class WebCrawlerTool(Tool):
+    """
+        Tool for crawling and extracting content from web pages using the Serper.dev API.
+
+        This tool enables LLM agents to extract text content from specific URLs.
+        It interacts with the Serper.dev scraping API to fetch the full text content
+        of web pages for analysis and information extraction.
+
+        Attributes:
+            name (str): The name identifier for the tool.
+            description (str): Human-readable description of the tool's functionality.
+            inputs (dict): Schema defining the expected input parameters.
+            output_type (str): The type of output returned by the tool.
+            api_key (str): API key for authenticating with Serper.dev.
+            url (str): Endpoint URL for the Serper.dev scraping API.
+            headers (dict): HTTP headers for API requests.
+    """
     name = "web_crawler"
     description = "Crawls and extracts all content from a specified URL using the Serper.dev API."
 

@@ -7,6 +7,22 @@ logger = logging.getLogger(__name__)
 
 
 class NewsSearchTool(Tool):
+    """
+        Tool for searching news articles using the Serper.dev API.
+
+        This tool enables LLM agents to search for recent news articles based on a query.
+        It interacts with the Serper.dev API to fetch relevant news content and returns
+        the results as a structured JSON string.
+
+        Attributes:
+            name (str): The name identifier for the tool.
+            description (str): Human-readable description of the tool's functionality.
+            inputs (dict): Schema defining the expected input parameters.
+            output_type (str): The type of output returned by the tool.
+            api_key (str): API key for authenticating with Serper.dev.
+            url (str): Endpoint URL for the Serper.dev news API.
+            headers (dict): HTTP headers for API requests.
+        """
     name = "news_search"
     description = "Fetches news articles using the Serper.dev API based on a search query."
 
@@ -20,6 +36,13 @@ class NewsSearchTool(Tool):
     output_type = "string"
 
     def __init__(self, api_key: str, **kwargs):
+        """
+                Initialize the NewsSearchTool with API credentials.
+
+                Args:
+                    api_key (str): The API key for authenticating with Serper.dev API.
+                    **kwargs: Additional keyword arguments passed to the parent Tool class.
+        """
         super().__init__(**kwargs)
         self.api_key = api_key
         self.url = "https://google.serper.dev/news"

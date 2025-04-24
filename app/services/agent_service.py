@@ -4,7 +4,7 @@ from typing import Dict, Any, List
 from functools import lru_cache
 from dotenv import load_dotenv
 from app.agents.agent_research import create_research_agent
-from app.prompts.agent_prompt import Agent_Prompt
+from app.prompts.agent_prompt import AgentPrompt
 # Load environment variables
 load_dotenv()
 
