@@ -2,6 +2,7 @@ import uvicorn
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.routers.research import router
+from app.routers import formater
 
 app = FastAPI(
     title="Research Agent API",
@@ -20,6 +21,7 @@ app.add_middleware(
 
 # Include routers
 app.include_router(router)
+app.include_router(formater.router)
 
 if __name__ == "__main__":
     uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)
