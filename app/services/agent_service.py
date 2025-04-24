@@ -35,7 +35,7 @@ class ResearchAgentService:
         """
 
         # Run the research agent
-        prompt = Agent_Prompt(query)
+        prompt = AgentPrompt(query)
         task = prompt.get_prompt()
 
         try:
