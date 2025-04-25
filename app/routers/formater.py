@@ -2,6 +2,7 @@ from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
 from google import genai
 from dotenv import load_dotenv
+from app.models.scheema import FormatRequest, Format
 import os
 
 load_dotenv()
@@ -13,13 +14,7 @@ router = APIRouter(
 )
 
 
-class Format(BaseModel):
-    Summary: str
-    Reference: list[str]
 
-
-class FormatRequest(BaseModel):
-    prompt: str
 
 
 @router.post("/generate")
