@@ -33,46 +33,44 @@ class ResearchAgentService:
         Returns:
             Dict[str, Any]: Research results including research_data and resource_links
         """
-
         # Run the research agent
         prompt = AgentPrompt(query)
         task = prompt.get_prompt()
 
         try:
             result = self.agent.run(json.dumps(task))
-            if isinstance(result , dict):
+
+            # Process the result into the expected format
+            if isinstance(result, dict):
                 data = result
-            # Try to parse the result as JSON
-            try:
-                data = json.loads(result)
-            except json.JSONDecodeError:
-                # If the result is not valid JSON, create a structured response
-                data = {
-                    "research_data": result,
-                    "resource_links": []
-                }
+            else:
+                # Try to parse the result as JSON if it's not already a dict
+                try:
+                    data = json.loads(result)
+                except (json.JSONDecodeError, TypeError):
+                    # If parsing fails, create a structured response
+                    data = {
+                        "research_data": str(result),
+                        "resource_links": []
+                    }
 
-            # Ensure the result has the expected structure
+            # Ensure the result has the expected structure and keys
             if not isinstance(data, dict):
-                data = {
-                    "research_data": str(data),
-                    "resource_links": []
-                }
+                data = {"research_data": str(data), "resource_links": []}
 
-
-            # Ensure the result has the expected keys
-            if "research_data" not in data:
-                data["research_data"] = ""
-            if "resource_links" not in data:
-                data["resource_links"] = []
+            # Add missing keys with default values
+            data.setdefault("research_data", "")
+            data.setdefault("resource_links", [])
 
             return data
 
         except Exception as e:
-            # Handle any errors
-            error_message = f"Error running research agent: {str(e)}"
+            # Log the error for debugging
+            logging.error(f"Research agent error: {str(e)}", exc_info=True)
+
+            # Return a structured error response
             return {
-                "research_data": error_message,
+                "research_data": f"Error running research agent: {str(e)}",
                 "resource_links": []
             }
 
