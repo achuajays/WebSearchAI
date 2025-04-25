@@ -1,3 +1,26 @@
+"""
+Research Agent Service
+
+This module provides a service for running a research agent to investigate a given query.
+
+The service is designed to be used as a singleton, with a single instance created and cached
+using the `lru_cache` decorator. This ensures that the agent is only created once, and that
+subsequent calls to the service will reuse the same instance.
+
+The service provides a single method, `run_research`, which takes a query string as input and
+returns a dictionary containing the research results. The dictionary will have two keys:
+
+* `research_data`: a string containing the compiled research findings
+* `resource_links`: a list of strings containing links to sources used in the research
+
+The service uses the `AgentPrompt` class to generate a prompt for the research agent, based on
+the input query. The prompt is then passed to the `run` method of the agent, which returns a
+dictionary containing the research results.
+
+The service also provides some basic error handling, catching any exceptions raised by the agent
+and returning a structured error response.
+"""
+
 import json
 import os
 from typing import Dict, Any, List
@@ -8,10 +31,22 @@ from app.prompts.agent_prompt import AgentPrompt
 from app.utils import config
 # Load environment variables
 load_dotenv()
-
-
 class ResearchAgentService:
-    def __init__(self):
+    """
+    A service for running a research agent to investigate a given query.
+
+    The service is designed to be used as a singleton, with a single instance created and cached
+    using the `lru_cache` decorator. This ensures that the agent is only created once, and that
+    subsequent calls to the service will reuse the same instance.
+    """
+
+    def __init__(self) -> None:
+        """
+        Initialize the service.
+
+        This method is only called once, when the service is first created. It sets up the
+        research agent and caches it for subsequent use.
+        """
         # Get the API key from environment variables
         self.serper_api_key = config.SERPER_API_KEY
         self.openai_api_key = config.GEMINI_API_KEY
@@ -33,6 +68,9 @@ class ResearchAgentService:
 
         Returns:
             Dict[str, Any]: Research results including research_data and resource_links
+
+        Raises:
+            Exception: If the agent raises an exception
         """
         # Run the research agent
         prompt = AgentPrompt(query)

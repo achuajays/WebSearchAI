@@ -1,3 +1,24 @@
+"""
+Comprehensive research prompts for LLM agents.
+
+This module provides a class for generating detailed research prompts for LLM agents.
+The prompts guide the agent through a systematic research methodology including search,
+data extraction, news analysis, and synthesis.
+
+The class is designed to be easy to use and provides clear documentation for each
+method and attribute. Code is well-commented and readable.
+
+Example:
+
+    >>> from app.prompts.agent_prompt import AgentPrompt
+    >>> agent_prompt = AgentPrompt("your research question or topic")
+    >>> prompt = agent_prompt.get_prompt()
+    >>> print(prompt)
+
+This will output a comprehensive research prompt with detailed instructions for
+conducting research on the provided topic.
+
+"""
 class AgentPrompt:
     """
         A class that generates comprehensive research prompts for LLM agents.

@@ -1,3 +1,18 @@
+"""
+Research Agent API
+
+The Research Agent API is a powerful tool designed to perform comprehensive research using Large Language Model (LLM) agents.
+This API enables users to conduct systematic web searches, extract data from authoritative sources, analyze recent news coverage, and synthesize findings into well-structured research reports.
+
+The API is built using the FastAPI framework and utilizes the Pydantic library to create comprehensive documentation and enforce data validation.
+
+The API is organized into the following endpoints:
+
+- `/api/research/run`: Run the research agent to investigate the provided query.
+- `/api/formater/generate`: Generate formatted text with summary and references from provided content.
+
+The API is designed to be easily extensible and maintainable.  The code is written to be readable and well-commented.
+"""
 import uvicorn
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware

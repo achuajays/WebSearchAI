@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException
 from app.services.agent_service import get_research_agent_service
-from app.models.scheema import ResearchRequest  , ResearchResponse
+from app.models.scheema import ResearchRequest, ResearchResponse
 from typing import Dict, Any
 
 router = APIRouter(
@@ -10,13 +10,11 @@ router = APIRouter(
 )
 
 
-
-
-@router.post("/run", response_model=Dict[str, Any])
+@router.post("/run", response_model=ResearchResponse)
 async def run_research_agent(
         request: ResearchRequest,
         agent_service=Depends(get_research_agent_service)
-):
+) -> ResearchResponse:
     """
     Run the research agent to investigate the provided query.
 
@@ -27,13 +25,15 @@ async def run_research_agent(
         agent_service: Research agent service injected via dependency
 
     Returns:
-        Dict[str, Any]: Research results including findings and resource links
+        ResearchResponse: Research results including findings and resource links
 
     Raises:
         HTTPException: 500 error if the research agent encounters any issues
     """
     try:
-        result = agent_service.run_research(request.query)
+        # Run the research agent with the provided query
+        result: ResearchResponse = agent_service.run_research(request.query)
         return result
     except Exception as e:
+        # Raise a 500 error if the research agent encounters any issues
         raise HTTPException(status_code=500, detail=f"Error running research agent: {str(e)}")
