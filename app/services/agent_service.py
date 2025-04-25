@@ -5,6 +5,7 @@ from functools import lru_cache
 from dotenv import load_dotenv
 from app.agents.agent_research import create_research_agent
 from app.prompts.agent_prompt import AgentPrompt
+from app.utils import config
 # Load environment variables
 load_dotenv()
 
@@ -12,8 +13,8 @@ load_dotenv()
 class ResearchAgentService:
     def __init__(self):
         # Get the API key from environment variables
-        self.serper_api_key = os.getenv("SERPER_API_KEY")
-        self.openai_api_key = os.getenv("GEMINI_API_KEY")
+        self.serper_api_key = config.SERPER_API_KEY
+        self.openai_api_key = config.GEMINI_API_KEY
 
         # Initialize the research agent
         self.agent = create_research_agent(

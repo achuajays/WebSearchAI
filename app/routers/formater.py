@@ -3,6 +3,7 @@ from pydantic import BaseModel
 from google import genai
 from dotenv import load_dotenv
 from app.models.scheema import FormatRequest, Format
+from app.utils import config
 import os
 
 load_dotenv()
@@ -32,7 +33,7 @@ async def generate_recipes(request: FormatRequest):
                       and error details.
     """
     try:
-        client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
+        client = genai.Client(api_key=config.GEMINI_API_KEY)
         response = client.models.generate_content(
             model='gemini-2.0-flash',
             contents='convert the given content to highly formatted text with the summary and references . - content to format - ' + request.prompt,
