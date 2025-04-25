@@ -178,6 +178,11 @@ Defines the tool for crawling and extracting content from web pages using the Se
 
 Defines the tool for performing web searches using the Serper.dev API.
 
+
+### `app/utils/config.py`
+
+Defines the configuration for the application.
+
 ### `tests/test_research_agent.py`
 
 Unit tests for the research agent API.
