@@ -40,7 +40,8 @@ class ResearchAgentService:
 
         try:
             result = self.agent.run(json.dumps(task))
-
+            if isinstance(result , dict):
+                data = result
             # Try to parse the result as JSON
             try:
                 data = json.loads(result)
@@ -57,8 +58,7 @@ class ResearchAgentService:
                     "research_data": str(data),
                     "resource_links": []
                 }
-            if isinstance(data , dict):
-                data = data
+
 
             # Ensure the result has the expected keys
             if "research_data" not in data:

@@ -77,6 +77,7 @@ class AgentPrompt:
                 - Cross-reference key facts across multiple sources
                 - Flag information gaps or areas requiring additional research
                 - Ensure all claims are properly attributed
+                - Ensure all responses are matched to the research topic
                 """
 
         return prompt
